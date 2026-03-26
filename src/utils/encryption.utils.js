@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import { buffer } from "node:stream/consumers";
 
 
 //generate 32byte random
@@ -28,7 +29,17 @@ export const encryption=(plainText)=>{
 }
 
 
+
+// "b75abf3492c8ae915d8bf4c73552a489:fade9c2f8ad1692b04f2c08e7ef22b0a"
 //Symmetric decryption
-export const decryption=()=>{
-    
+export const decryption=(inputCipher)=>{
+    //Split sipher- [iv - encryption data]
+    const [iv, encryptedData] = inputCipher.split(":")
+    // console.log({encryptedData})
+    const bufferIv = Buffer.from(iv, "hex")
+    const decCipher= crypto.createDecipheriv('aes-256-cbc', ENC_KEY, bufferIv )
+    let decrypted = decCipher.update(encryptedData, "hex", "utf-8")
+    decrypted+= decCipher.final("utf-8")
+    return decrypted;
+
 }
