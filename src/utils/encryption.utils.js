@@ -1,5 +1,5 @@
 import crypto from "node:crypto";
-import { buffer } from "node:stream/consumers";
+import fs from "node:fs"
 
 
 //generate 32byte random
@@ -32,6 +32,7 @@ export const encryption=(plainText)=>{
 
 // "b75abf3492c8ae915d8bf4c73552a489:fade9c2f8ad1692b04f2c08e7ef22b0a"
 //Symmetric decryption
+
 export const decryption=(inputCipher)=>{
     //Split sipher- [iv - encryption data]
     const [iv, encryptedData] = inputCipher.split(":")
@@ -43,3 +44,35 @@ export const decryption=(inputCipher)=>{
     return decrypted;
 
 }
+
+
+
+
+//Asymmetric Encryption
+
+//First - Genrate 2Keys [Puplic - Private]
+// puplic Key For Encryption
+// Private Key For Decryption
+
+if(fs.existsSync('publicKey.pem') && fs.existsSync('privateKey.pev')){
+    console.log('Keys Already Exist')
+}else{
+    const {publicKey, privateKey}= crypto.generateKeyPairSync('rsa',
+    {
+        modulusLength:2048,
+        publicKeyEncoding:{
+            type:"pkcs1",
+            format:'pem'
+        },
+        privateKeyEncoding:{
+            type:"pkcs1",
+            format:"pem"
+        }
+    }
+)
+fs.writeFileSync('publicKey.pem', publicKey)
+fs.writeFileSync('privateKey.pem',privateKey )
+}
+
+
+
