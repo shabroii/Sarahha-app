@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { register } from "./auth.service.js";
+import { logIn, register } from "./auth.service.js";
 
 const authController=Router()
 
@@ -12,6 +12,20 @@ try {
 } catch (error) {
     res.status(400).json({error:error.message})
 }
+})
+
+
+
+
+authController.post('/login', async(req, res)=>{
+
+
+    try {
+       const result=  await logIn(req.body)
+        res.status(200).json({Message:"Logged in successfully", Data:result })
+    } catch (error) {
+        res.status(400).json({error:error.message})
+    }
 })
 
 

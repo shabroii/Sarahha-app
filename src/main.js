@@ -1,7 +1,7 @@
 import express from 'express'
 import dbConnection from './db/db.connection.js';
 import * as controllers from './modules/index.js'
-import {decryption, encryption} from './utils/encryption.utils.js'
+import {decryption, encryption} from './common/security/encryption.js'
 
 const app =express()
 const port=3000;
@@ -40,9 +40,9 @@ app.listen(port, ()=>{
 
 
 
-const encryptedData = encryption('hello world')
+// const encryptedData = encryption('hello world')
 
 
-const decryptedData= decryption(encryptedData)
+// const decryptedData= decryption(encryptedData)
 
-console.log({encryptedData, decryptedData})
+// console.log({encryptedData, decryptedData})

@@ -54,7 +54,7 @@ export const decryption=(inputCipher)=>{
 // puplic Key For Encryption
 // Private Key For Decryption
 
-if(fs.existsSync('publicKey.pem') && fs.existsSync('privateKey.pev')){
+if(fs.existsSync('publicKey.pem') && fs.existsSync('privateKey.pem')){
     console.log('Keys Already Exist')
 }else{
     const {publicKey, privateKey}= crypto.generateKeyPairSync('rsa',
@@ -75,4 +75,31 @@ fs.writeFileSync('privateKey.pem',privateKey )
 }
 
 
+export const AssymetricEncryption=(text)=>{
+
+    const bufferdText = Buffer.from(text, "utf-8")
+    const publicKey= fs.readFileSync('publicKey.pem')
+
+    const encryptedData = crypto.publicEncrypt({
+        key:publicKey,
+        padding:crypto.constants.RSA_PKCS1_OAEP_PADDING
+    },
+    bufferdText
+)
+return encryptedData.toString('hex')
+}
+
+export const AssymetricDecryption=(text)=>{
+
+    const bufferdText = Buffer.from(text, "hex")
+    const privateKey= fs.readFileSync('privateKey.pem')
+
+    const decryptedData = crypto.privateDecrypt({
+        key:privateKey,
+        padding:crypto.constants.RSA_PKCS1_OAEP_PADDING
+    },
+    bufferdText
+)
+return decryptedData.toString('utf-8')
+}
 

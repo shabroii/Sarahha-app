@@ -1,9 +1,5 @@
 import mongoose  from "mongoose";
-import { GENDER, STATUS, USER_ROLES } from "../../utils/index.js";
-
-
-
-
+import { GENDER, STATUS, USER_ROLES } from "../../common/constants.js";
 
 
  const userSchema= new mongoose.Schema(
