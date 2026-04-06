@@ -1,4 +1,4 @@
-import mongoose  from "mongoose";
+import mongoose, { mongo }  from "mongoose";
 import { GENDER, STATUS, USER_ROLES } from "../../common/constants.js";
 
 
@@ -61,7 +61,7 @@ userSchema.virtual('fullName').get(function(){
 })
 
 
-const User= mongoose.model('users', userSchema)
+const User=mongoose.models.User || mongoose.model('users', userSchema)
 
 
 export default User; 

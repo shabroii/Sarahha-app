@@ -1,6 +1,7 @@
-import User from "../../db/models/user.model.js";
 import { AssymetricEncryption, encryption } from "../../common/security/encryption.js";
 import { comparePassword, hashPass } from '../../common/index.js'
+// import User from "../../db/models/user.model.js";
+import userRepository from "../../db/repositories/user.repository.js";
 
 
 
@@ -11,7 +12,8 @@ export const register= async (body)=>{
 
 const {firstName, lastName, email, password, role, gender, phoneNumber}= body
 
-const EmailExist= await User.findOne({email}).select("email")
+const EmailExist= await userRepository.findOneDocument({email}, {email:1})
+// console.log({EmailExist})
 
 if(EmailExist){
     throw new Error('Email already exists')
@@ -32,7 +34,7 @@ if(phoneNumber){
     userData.phoneNumber =encryption(phoneNumber)
 }
 
- return await User.create(userData)
+ return await userRepository.createDocument(userData)
 
 }
 
@@ -41,7 +43,7 @@ if(phoneNumber){
 export const logIn= async (body)=>{
     const {email, password} = body
 
-    const userExist= await User.findOne({email})
+    const userExist= await userRepository.findOneDocument({email})
 
     if(!userExist){
         throw new Error('User Not Found !')
