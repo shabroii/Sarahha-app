@@ -1,4 +1,6 @@
 
+
+//User Enums
 export const USER_ROLES={
     USER:"user",
     ADMIN:"admin"
@@ -16,3 +18,12 @@ export const STATUS={
     INACTIVE:"inactive"
 }
 
+
+export const fileExtentions= {
+    image:['jpg', 'jpeg', 'png', 'gif']
+}
+
+export const CHANNELS={
+    EMAIL:"email",
+    PHONE:"phone"
+}

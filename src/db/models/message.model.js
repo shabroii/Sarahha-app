@@ -8,8 +8,8 @@ content:{
     type:String,
     required:true
 },
-reciverId:{
-    type:String,
+receiverId:{
+    type: mongoose.Schema.Types.ObjectId,
     ref:'User',
     required:true,
     index:{

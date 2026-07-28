@@ -1,6 +1,9 @@
 /node_modules
-
+*.env
 Keys & Sensitive Files 
 =====================
 privateKey.pem
 publicKey.pem
+============
+
+uploads

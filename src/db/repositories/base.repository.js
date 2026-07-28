@@ -15,8 +15,16 @@ export class baseRepository{
       return this.model.findOne(filters).select(select)
     }
 
-    findDocumentById(){
-       return this.model.findById()
+    findDocumentById(id){
+       return this.model.findById(id)
+    }
+
+    findByIdAndUpdate({id, data, options}){
+      return this.model.findByIdAndUpdate(id, data, options)
+    }
+
+    findDocuments(){
+      return this.model.find()
     }
 
     deleteOneDocument(){
@@ -26,6 +34,15 @@ export class baseRepository{
     deleteMultipleDocuments(){
        return this.model.deleteMany()
     }
+
+   updatOneDocument(data){
+      return this.model.updateOne()
+   }
+
+   updatManyDocument(data){
+      return this.model.updateMany()
+   }
+
 
 
 }

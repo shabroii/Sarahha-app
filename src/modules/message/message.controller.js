@@ -3,9 +3,9 @@ import { messages } from "./message.service.js";
 
 const messageController=Router()
 
-messageController.post('/sendMessage',async (req, res)=>{
+messageController.post('/messages/:receiverId',async (req, res)=>{
     try {
-       const result= await messages(req.body)
+       const result= await messages(req.body, req.params)
         res.status(201).json({message:'Message Sent Successfully', result})
     } catch (error) {
         res.status(400).json({error:error.message})
