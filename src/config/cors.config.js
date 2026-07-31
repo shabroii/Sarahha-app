@@ -1,5 +1,5 @@
 import cors from 'cors'
-import envConfig from './env.config'
+import envConfig from './env.config.js'
 
 const whiteListedOrigins =envConfig.cors.whiteListedOrigins
 
